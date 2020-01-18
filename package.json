@@ -1,0 +1,23 @@
+{
+  "name": "mongo-todo",
+  "version": "1.0.0",
+  "description": "A simple CRUD operation on a MongoDB application with Mongoose ORM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uniqueayo1988/mongo-todo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uniqueayo1988/mongo-todo/issues"
+  },
+  "homepage": "https://github.com/uniqueayo1988/mongo-todo#readme",
+  "dependencies": {
+    "mongodb": "^3.5.1"
+  }
+}
