@@ -20,12 +20,20 @@ var app = express()
 app.use(bodyParser.json())
 
 app.post('/todos', (req, res) => {
-  var newTodo = new Todo(req.body)
+  var todo = new Todo(req.body)
 
-  newTodo.save().then(doc => {
+  todo.save().then(doc => {
     res.status(201).send(doc)
   }, (e) => {
     res.status(400).send({message: 'Unable to create document'})
+  })
+})
+
+app.get('/todos', (req, res) => {
+  Todo.find().then(doc => {
+    res.status(200).send({doc})
+  }, e => {
+    res.status(400).send(e)
   })
 })
 
