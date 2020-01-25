@@ -3,21 +3,12 @@ var bodyParser = require('body-parser')
 const {ObjectId} = require('mongodb')
 
 var {mongoose} = require('./db/mongoose')
-
-// var newUser = new User({
-//   email: 'c@test.com'
-// })
-
-// newUser.save().then(user => {
-//   console.log('Saved user', user)
-// }, (e) => {
-//   console.log('Unable to save user')
-// })
-
 var {Todo} = require('./models/todo')
 var {User} = require('./models/user')
 
 var app = express()
+const port = process.env.PORT || 3000
+
 app.use(bodyParser.json())
 
 app.post('/todos', (req, res) => {
@@ -46,12 +37,16 @@ app.get('/todos/:id', (req, res) => {
   }
   
   Todo.findById(id).then(doc => {
+    if (!todo) {
+      return res.status(400).send({message: 'Id not valid'})
+    }
+
     res.status(200).send({doc})
   }, e => {
-    res.status(404).send({message: 'User not found'})
+    res.status(404).send({message: 'Error fetching user'})
   })
 })
 
-app.listen(3000, () => {
-  console.log('Started on PORT 3000')
+app.listen(port, () => {
+  console.log(`Started on PORT ${port}`)
 })
