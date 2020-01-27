@@ -38,12 +38,29 @@ app.get('/todos/:id', (req, res) => {
   
   Todo.findById(id).then(doc => {
     if (!todo) {
-      return res.status(400).send({message: 'Id not valid'})
+      return res.status(400).send({message: 'Id not found'})
     }
 
     res.status(200).send({doc})
   }, e => {
     res.status(404).send({message: 'Error fetching user'})
+  })
+})
+
+app.delete('/todos/:id', (req, res) => {
+  var id = req.params.id
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).send({message: 'Id not valid'})
+  }
+  
+  Todo.findByIdAndRemove(id).then(doc => {
+    if (!todo) {
+      return res.status(400).send({message: 'Id not found'})
+    }
+
+    res.status(200).send({doc})
+  }, e => {
+    res.status(404).send({message: 'Error deleting user'})
   })
 })
 
