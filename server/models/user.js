@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const jwt = require('jsonwebtoken')
 
 // User Model
-var User = mongoose.model('User', {
+var UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true, // required: [true, 'Email is required']
@@ -31,5 +32,13 @@ var User = mongoose.model('User', {
     }
   }]
 })
+
+UserSchema.methods.generateAuthToken = function () {
+  var user = this
+  var access = 'auth'
+  var token = 
+}
+ 
+var User = mongoose.model('User', UserSchema)
 
 module.exports = {User}
